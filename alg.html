@@ -1,0 +1,56 @@
+<html>
+
+<head>
+    <title>Alg de Retas</title>
+    <script type="text/javascript" src="alg.js"></script>
+    <link rel="stylesheet" href="alg.css">
+</head>
+
+<body>
+    <div class="actions">
+        <div>
+            <input type="radio" name="alg" id="algDDA" value="0">
+            <label for="algDDA">DDA</label>
+        </div>
+
+        <div>
+            <input type="radio" name="alg" id="algBresenham" value="1">
+            <label for="algBresenham">Bresenham</label>
+        </div>
+
+        <div>
+            <input type="radio" name="alg" id="algCirculo" value="2">
+            <label for="algCirculo">Circulo</label>
+
+            <fieldset>
+                <label for="radius">Radius</label>
+                <input type="text" id="radius" value="10">
+            </fieldset>
+        </div>
+
+        <fieldset>
+            Inicio:
+            <label for="">X</label>
+            <input type="text" id="x0" value="0">
+
+            <label for="">Y</label>
+            <input type="text" id="y0" value="10">
+        </fieldset>
+
+        <fieldset>
+            Fim:
+            <label for="">X</label>
+            <input type="text" id="x1" value="100">
+
+            <label for="">Y</label>
+            <input type="text" id="y1" value="20">
+        </fieldset>
+
+        <button onclick="rodarAlg()">Rodar Alg</button>
+    </div>
+    <div>
+        <canvas id="my-canvas" class="canvas"></canvas>
+    </div>
+</body>
+
+</html>
