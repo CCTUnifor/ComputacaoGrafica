@@ -11,7 +11,7 @@ function rodarAlg() {
     }
 
     loadValues();
-    switch(algType) {
+    switch (algType) {
         case 0:
             dda();
             break;
@@ -35,7 +35,7 @@ function loadValues() {
 }
 
 function dda() {
-    var m = (y1 - y0) / (x1 - x0); 
+    var m = (y1 - y0) / (x1 - x0);
     var y = 0;
     for (var x = x0; x <= x1; x++) {
         y = y0 + m * (x - x0);
@@ -52,7 +52,9 @@ function bresenham() {
     incrNE = (dy - dx) * 2;
     x = x0;
     y = y0;
-    drawPixel(x, y);
+    const m = dx > 0 ? dy / dx : 0;
+
+    drawPixelBresenham(m, x, y);
     while (x < x1) {
         x++;
         if (d <= 0)
@@ -61,7 +63,7 @@ function bresenham() {
             d += incrNE;
             y = y + 1;
         }
-        drawPixel(x, y);
+        drawPixelBresenham(m, x, y);
     }
 }
 
@@ -92,6 +94,36 @@ function drawCirclePixel(x, y) {
     drawPixel(-y, x);
     drawPixel(-x, y);
 }
+
+function drawPixelBresenham(m, x, y) {
+    if (ehEsquadraoUm(m))
+        drawPixel(x, y);
+    else if (ehEsquadraoDois(m))
+        drawPixel(y, x);
+    else if (ehEsquadraoTres(m))
+        drawPixel(-y, x);
+    else if (ehEsquadraoQuatro(m))
+        drawPixel(-x, y);
+    else if (ehEsquadraoCinco(m))
+        drawPixel(-x, -y);
+    else if (ehEsquadraoSeis(m))
+        drawPixel(-y, -x);
+    else if (ehEsquadraoSete(m))
+        drawPixel(y, -x);
+    else if (ehEsquadraoOito(m))
+        drawPixel(x, -y);
+    else
+        drawPixel(x, y);
+}
+
+function ehEsquadraoUm(m) { return m > 0 && m < 1 }
+function ehEsquadraoDois(m) { return m > 1 }
+function ehEsquadraoTres(m) { return m < -1 }
+function ehEsquadraoQuatro(m) { return m > -1 && m < 0 }
+function ehEsquadraoCinco(m) { return m > 0 && m < 1 }
+function ehEsquadraoSeis(m) { return m > 1 }
+function ehEsquadraoSete(m) { return m < -1 }
+function ehEsquadraoOito(m) { return m > -1 && m < 0 }
 
 function drawPixel(x, y) {
     const ctx = myCanvas.getContext('2d');
