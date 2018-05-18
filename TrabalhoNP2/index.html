@@ -17,11 +17,13 @@
 <body>
 
     <div class="header">
-        <div class="filter">
+        <div class="filter btn-group">
             <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#filterCollapse" aria-expanded="false"
                 aria-controls="filterCollapse">
                 Filter
             </button>
+            <button class="btn" onclick="run()">Run</button>
+            <button class="btn" onclick="randomLines()">Random</button>
         </div>
 
         <div id="filterCollapse" class="collapse">
@@ -54,12 +56,9 @@
                 </div>
             </div>
         </div>
-        <div style="padding: 15px">
-            <button class="btn" onclick="run()">Run</button>
-            <button class="btn" onclick="randomLines()">Random</button>
-        </div>
+
     </div>
-    
+
     <div class="canvas-container">
         <canvas id="my-canvas" class="canvas"></canvas>
     </div>
