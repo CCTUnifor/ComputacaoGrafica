@@ -16,27 +16,27 @@
     <div class="row" style="padding: 15px">
         <div class="form-group col-md-2">
             <label for="xMinInput">x min</label>
-            <input type="text" id="xMinInput" class="form-control">
+            <input type="text" id="xMinInput" class="form-control" value="0">
         </div>
         <div class="form-group col-md-2">
             <label for="yMinInput">y min</label>
-            <input type="text" id="yMinInput" class="form-control">
+            <input type="text" id="yMinInput" class="form-control" value="0">
         </div>
 
         <div class="col-md-2"></div>
 
         <div class="form-group col-md-2">
             <label for="xMaxInput">x max</label>
-            <input type="text" id="xMaxInput" class="form-control">
+            <input type="text" id="xMaxInput" class="form-control" value="100">
         </div>
         <div class="form-group col-md-2">
             <label for="yMaxInput">y max</label>
-            <input type="text" id="yMaxInput" class="form-control">
+            <input type="text" id="yMaxInput" class="form-control" value="100">
         </div>
     </div>
 
-    <button class="btn">Random</button>
-    <button class="btn">Gerar</button>
+    <button class="btn" onclick="randomLine()">Random</button>
+    <button class="btn" onclick="run()">Run</button>
 
     <div>
         <canvas id="my-canvas" class="canvas"></canvas>

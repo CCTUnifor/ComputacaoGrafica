@@ -1,40 +1,45 @@
-$(document).ready(function () {
-    var xMinInput = $("#xMinInput");
-    var yMinInput = $("#yMinInput");
-    var xMaxInput = $("#xMaxInput");
-    var yMaxInput = $("#yMaxInput");
+var myCanvas = document.getElementById("my-canvas");;
+const ctx = myCanvas.getContext('2d');
 
-    var xDefault = 100;
-    var yDefault = 25;
+var xMinInput = $("#xMinInput")[0];
+var yMinInput = $("#yMinInput")[0];
+var xMaxInput = $("#xMaxInput")[0];
+var yMaxInput = $("#yMaxInput")[0];
 
-    var xMin = 0;
-    var yMin = 0;
-    var xMax = 0;
-    var yMax = 0;
-    var myCanvas = document.getElementById("my-canvas");;
-    const ctx = myCanvas.getContext('2d');
-    
-    initializeChanges();
+var xDefault = 65;
+var yDefault = 15;
 
-    function generateNewRow() {
+var xMin = 0;
+var yMin = 0;
+var xMax = 0;
+var yMax = 0;
+var lines = [];
 
-    }
-
+function run() {
+    initializeInputs();
     drawRectangle(xMin, yMin, xMax, yMax);
+}
+
+function randomLine() {
+    var newLine = randomReta();
+    lines.push(newLine);
+    console.log(newLine);
+}
 
 
-    function initializeChanges() {
-        xMinInput.change(function () { xMin = xMinInput.value + xDefault; drawRectangle() })
-        yMinInput.change(function () { yMin = yMinInput.value + yDefault; })
-        xMaxInput.change(function () { xMax = xMaxInput.value + xDefault; })
-        yMaxInput.change(function () { yMax = yMaxInput.value + yDefault; })
-    }
 
-    function drawRectangle(x0, y0, x1, y1) {
-        bresenham(x0, y0, x0, y1);
-        bresenham(x0, y0, x1, y0);
-        bresenham(x0, y1, x1, y1);
-        bresenham(x1, y0, x1, y1);
-    }
-});
 
+function initializeInputs() {
+    xMin = parseInt(xMinInput.value) + xDefault;
+    yMin = parseInt(yMinInput.value) + yDefault;
+    xMax = parseInt(xMaxInput.value) + xDefault;
+    yMax = parseInt(yMaxInput.value) + yDefault;
+}
+
+function drawRectangle(x0, y0, x1, y1) {
+    console.log("drawRectangle: [", x0, ", ", y0, "] [", x1, ", ", y1, "]");
+    bresenham(x0, y0, x0, y1);
+    bresenham(x0, y0, x1, y0);
+    bresenham(x0, y1, x1, y1);
+    bresenham(x1, y0, x1, y1);
+}

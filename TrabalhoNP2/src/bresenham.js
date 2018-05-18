@@ -1,5 +1,5 @@
-var myCanvas = document.getElementById("my-canvas");;
-const ctx = myCanvas.getContext('2d');
+// var myCanvas = document.getElementById("my-canvas");;
+// const ctx = myCanvas.getContext('2d');
 
 function bresenham(x, y, x2, y2, cor) {
     var dx = x2 - x ;
