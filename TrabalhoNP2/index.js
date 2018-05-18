@@ -7,13 +7,10 @@ var xMaxInput = $("#xMaxInput")[0];
 var yMaxInput = $("#yMaxInput")[0];
 var nLinesInput = $("#nLinesInput")[0];
 
-var xDefault = 65;
-var yDefault = 15;
+var xDefault = 90;
+var yDefault = 25;
 
-var xMin = 0;
-var yMin = 0;
-var xMax = 0;
-var yMax = 0;
+var rectangle = new Line(0, 0, 0, 0);
 var lines = [];
 
 const rectColor = "#007d1d";
@@ -24,13 +21,13 @@ const outColor = "#ff0000";
 function run() {
     clear();
     initializeInputs();
-    drawRectangle(xMin, yMin, xMax, yMax);
+    drawRectangle(rectangle.px, rectangle.py, rectangle.qx, rectangle.qy);
 }
 
 function randomLines() {
     for (let i = 0; i < parseInt(nLinesInput.value); i++) {
         var newLine = randomReta(myCanvas.width, myCanvas.height);
-        console.log(newLine);
+        console.log(newLine.toString());
         lines.push(newLine);
 
         clipping(newLine);
@@ -38,33 +35,36 @@ function randomLines() {
 }
 
 function initializeInputs() {
-    xMin = parseInt(xMinInput.value) + xDefault;
-    yMin = parseInt(yMinInput.value) + yDefault;
-    xMax = parseInt(xMaxInput.value) + xDefault;
-    yMax = parseInt(yMaxInput.value) + yDefault;
+    rectangle = new Line(
+        parseInt(xMinInput.value) + xDefault,
+        parseInt(yMinInput.value) + yDefault,
+        parseInt(xMaxInput.value) + xDefault,
+        parseInt(yMaxInput.value) + yDefault
+    );
 }
 
 function drawRectangle(x0, y0, x1, y1) {
     console.log("drawRectangle: [", x0, ", ", y0, "] [", x1, ", ", y1, "]");
-    bresenham(x0, y0, x0, y1, rectColor);
-    bresenham(x0, y0, x1, y0, rectColor);
-    bresenham(x0, y1, x1, y1, rectColor);
-    bresenham(x1, y0, x1, y1, rectColor);
+    var ignoreCalcY = true;
+    bresenham(new Line(x0, y0, x0, y1, ignoreCalcY), rectColor);
+    bresenham(new Line(x0, y0, x1, y0, ignoreCalcY), rectColor);
+    bresenham(new Line(x0, y1, x1, y1, ignoreCalcY), rectColor);
+    bresenham(new Line(x1, y0, x1, y1, ignoreCalcY), rectColor);
 
-    bresenhamDashed(x0, 0, x0, y0, rectDashedColor);
-    bresenhamDashed(x0, y1, x0, myCanvas.height, rectDashedColor);
+    bresenhamDashed(new Line(x0, 0, x0, y0, ignoreCalcY), rectDashedColor);
+    bresenhamDashed(new Line(x0, y1, x0, myCanvas.height, ignoreCalcY), rectDashedColor);
 
-    bresenhamDashed(x1, 0, x1, y0, rectDashedColor);
-    bresenhamDashed(x1, y1, x1, myCanvas.height, rectDashedColor);
-    
-    bresenhamDashed(0, y0, x0, y0, rectDashedColor);
-    bresenhamDashed(x1, y0, myCanvas.width, y0, rectDashedColor);
+    bresenhamDashed(new Line(x1, 0, x1, y0, ignoreCalcY), rectDashedColor);
+    bresenhamDashed(new Line(x1, y1, x1, myCanvas.height, ignoreCalcY), rectDashedColor);
 
-    bresenhamDashed(0, y0, x0, y0, rectDashedColor);
-    bresenhamDashed(x1, y1, myCanvas.width, y1, rectDashedColor);
+    bresenhamDashed(new Line(0, y0, x0, y0, ignoreCalcY), rectDashedColor);
+    bresenhamDashed(new Line(x1, y0, myCanvas.width, y0, ignoreCalcY), rectDashedColor);
 
-    bresenhamDashed(0, y1, x0, y1, rectDashedColor);
-    bresenhamDashed(x1, y1, myCanvas.width, y1, rectDashedColor);
+    bresenhamDashed(new Line(0, y0, x0, y0, ignoreCalcY), rectDashedColor);
+    bresenhamDashed(new Line(x1, y1, myCanvas.width, y1, ignoreCalcY), rectDashedColor);
+
+    bresenhamDashed(new Line(0, y1, x0, y1, ignoreCalcY), rectDashedColor);
+    bresenhamDashed(new Line(x1, y1, myCanvas.width, y1, ignoreCalcY), rectDashedColor);
 }
 
 function clear() {

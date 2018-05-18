@@ -1,14 +1,14 @@
-function bresenham(x, y, x2, y2, cor) {
-    doBresenham(x, y, x2, y2, cor);
+function bresenham(line, cor) {
+    doBresenham(line, cor);
 }
 
-function bresenhamDashed(x, y, x2, y2, cor) {
-    doBresenham(x, y, x2, y2, cor, true)
+function bresenhamDashed(line, cor) {
+    doBresenham(line, cor, true)
 }
 
-function doBresenham(x, y, x2, y2, cor, dashed) {
-    var dx = x2 - x;
-    var dy = y2 - y;
+function doBresenham(line, cor, dashed) {
+    var dx = line.qx - line.px;
+    var dy = line.qy - line.py;
     var dx1 = 0, dy1 = 0, dx2 = 0, dy2 = 0;
     if (dx < 0) dx1 = -1; else if (dx > 0) dx1 = 1;
     if (dy < 0) dy1 = -1; else if (dy > 0) dy1 = 1;
@@ -24,15 +24,15 @@ function doBresenham(x, y, x2, y2, cor, dashed) {
     var numerator = longest / 2;
     for (var i = 0; i <= longest; i++) {
         if (!(!!dashed && i % 2 == 0))
-            drawPixel(x, y, cor);
+            drawPixel(line.px, line.py, cor);
         numerator += shortest;
         if (numerator >= longest) {
             numerator -= longest;
-            x += dx1;
-            y += dy1;
+            line.px += dx1;
+            line.py += dy1;
         } else {
-            x += dx2;
-            y += dy2;
+            line.px += dx2;
+            line.py += dy2;
         }
     }
 }
