@@ -16,18 +16,17 @@ var yMax = 0;
 var lines = [];
 
 function run() {
+    clear();
     initializeInputs();
     drawRectangle(xMin, yMin, xMax, yMax);
 }
 
 function randomLine() {
-    var newLine = randomReta();
+    var newLine = randomReta(myCanvas.width, myCanvas.height);
     lines.push(newLine);
+    bresenham(newLine.x0, newLine.y0, newLine.x1, newLine.y1);
     console.log(newLine);
 }
-
-
-
 
 function initializeInputs() {
     xMin = parseInt(xMinInput.value) + xDefault;
@@ -42,4 +41,8 @@ function drawRectangle(x0, y0, x1, y1) {
     bresenham(x0, y0, x1, y0);
     bresenham(x0, y1, x1, y1);
     bresenham(x1, y0, x1, y1);
+}
+
+function clear() {
+    ctx.clearRect(0, 0, myCanvas.width, myCanvas.height);
 }

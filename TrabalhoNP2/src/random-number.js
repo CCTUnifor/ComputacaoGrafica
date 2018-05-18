@@ -2,11 +2,11 @@ function random() {
     return Math.random() * 100;
 }
 
-function randomReta() {
+function randomReta(width, heigth) {
     return {
-        x0: random(),
-        x1: random(),
-        y0: random(),
-        y1: random()
+        x0: Math.random() * (width - 0) + 0,
+        x1: Math.random() * (width - 0) + 0,
+        y0: Math.random() * (heigth - 0) + 0,
+        y1: Math.random() * (heigth - 0) + 0
     };
 }
