@@ -1,10 +1,18 @@
-function Line(_px, _py, _qx, _qy, ignore) {
+function Line(_px, _py, _qx, _qy) {
     px = _px;
-    py = !!ignore ? (myCanvas.height - _py) - 1 : _py;
+    py = _py;
     qx = _qx;
-    qy = !!ignore ? (myCanvas.height - _qy) - 1 : _qy;
-    _codigoP = codigo(px, py);
-    _codigoQ = codigo(qx, qy);
+    qy = _qy;
+
+    var codigoP = "";
+    var codigoQ = "";
+
+    calcCodigos();
+
+    function calcCodigos() {
+        codigoP = codigo(px, py);
+        codigoQ = codigo(qx, qy);
+    }
 
     function codigo(x, y) {
         var cod = "0000";
@@ -20,8 +28,37 @@ function Line(_px, _py, _qx, _qy, ignore) {
         return cod;
     }
 
+    function sameArea() {
+        for (let i = 0; i < codigoP.length; i++) {
+            const elementP = codigoP[i];
+            const elementQ = codigoQ[i];
+            if (elementP == 1 && elementQ == 1)
+                return true;
+        }
+    }
+
+    function isCenter() {
+        return codigoPIsCenter() && codigoQIsCenter();
+    }
+
+    function codigoPIsCenter() {
+        return codigoP == "0000";
+    }
+
+    function codigoQIsCenter() {
+        return codigoQ == "0000";
+    }
+
+    function mx() {
+        return (qy - py) /(qx - px);
+    }
+
+    function my() {
+        return (qx - px) / (qy - py);
+    }
+
     function toString() {
-        return `p:[${px}, ${py}] Cp:[${_codigoP}]\nq:[${qx}, ${qy}]Cq:[${_codigoQ}]`;
+        return `p:[${px}, ${py}] Cp:[${codigoP}]\nq:[${qx}, ${qy}]Cq:[${codigoQ}]`;
     }
 
     return {
@@ -29,9 +66,20 @@ function Line(_px, _py, _qx, _qy, ignore) {
         py,
         qx,
         qy,
-        codigoP: _codigoP,
-        codigoQ: _codigoQ,
-        toString
+        pyInvertido,
+        qyInvertido,
+        calcCodigos,
+        codigoP,
+        codigoQ,
+        mx,
+        my,
+        sameArea,
+        codigoPIsCenter,
+        codigoQIsCenter,
+        isCenter,
+        // mx,
+        // my,
+        toString,
     };
 }
 

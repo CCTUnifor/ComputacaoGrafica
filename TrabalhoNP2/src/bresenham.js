@@ -1,9 +1,11 @@
 function bresenham(line, cor) {
-    doBresenham(line, cor);
+    var aux = new Line(line.px, line.py, line.qx, line.qy);
+    doBresenham(aux, cor);
 }
 
 function bresenhamDashed(line, cor) {
-    doBresenham(line, cor, true)
+    var aux = new Line(line.px, line.py, line.qx, line.qy);
+    doBresenham(aux, cor, true)
 }
 
 function doBresenham(line, cor, dashed) {
@@ -24,7 +26,7 @@ function doBresenham(line, cor, dashed) {
     var numerator = longest / 2;
     for (var i = 0; i <= longest; i++) {
         if (!(!!dashed && i % 2 == 0))
-            drawPixel(line.px, line.py, cor);
+            drawPixel(line.px, pyInvertido(line.py), cor);
         numerator += shortest;
         if (numerator >= longest) {
             numerator -= longest;
@@ -42,3 +44,6 @@ function drawPixel(x, y, cor) {
     ctx.fillStyle = cor;
     ctx.fillRect(x, y, 1, 1);
 }
+
+function pyInvertido(py) { return (myCanvas.height - py) - 1; }
+function qyInvertido() { return (myCanvas.height - qy) - 1; }

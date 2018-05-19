@@ -15,7 +15,7 @@ var lines = [];
 
 const rectColor = "#007d1d";
 const rectDashedColor = "#3800a5";
-const insideColor = "#000000";
+const insideColor = "#0000008a";
 const outColor = "#ff0000";
 
 function run() {
@@ -27,7 +27,7 @@ function run() {
 function randomLines() {
     for (let i = 0; i < parseInt(nLinesInput.value); i++) {
         var newLine = randomReta(myCanvas.width, myCanvas.height);
-        console.log(newLine.toString());
+        // console.log(newLine.toString());
         lines.push(newLine);
 
         clipping(newLine);
