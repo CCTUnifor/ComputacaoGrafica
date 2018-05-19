@@ -6,6 +6,8 @@ var yMinInput = $("#yMinInput")[0];
 var xMaxInput = $("#xMaxInput")[0];
 var yMaxInput = $("#yMaxInput")[0];
 var nLinesInput = $("#nLinesInput")[0];
+var ignoreInput = $("#ignoreInput");
+var time = $("#time")[0];
 
 var xDefault = 90;
 var yDefault = 25;
@@ -25,6 +27,7 @@ function run() {
 }
 
 function randomLines() {
+    var t0 = performance.now();
     for (let i = 0; i < parseInt(nLinesInput.value); i++) {
         var newLine = randomReta(myCanvas.width, myCanvas.height);
         // console.log(newLine.toString());
@@ -32,6 +35,9 @@ function randomLines() {
 
         clipping(newLine);
     }
+    var t1 = performance.now();
+    console.log("Time: " + (t1 - t0) + "ms");
+    time.value = Math.round((t1 - t0) * 100) / 100 + "ms";
 }
 
 function initializeInputs() {

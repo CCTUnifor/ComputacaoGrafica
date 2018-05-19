@@ -24,6 +24,18 @@
             </button>
             <button class="btn" onclick="run()">Run</button>
             <button class="btn" onclick="randomLines()">Random</button>
+            <div class="form-group col-md-2">
+                <label for="nLinesInput">n lines</label>
+                <input type="text" id="nLinesInput" class="form-control" value="1">
+            </div>
+            <div class="form-group col-md-2">
+                <label for="ignoreInput">Ignore</label>
+                <input type="checkbox" id="ignoreInput" class="form-control" value="1">
+            </div>
+            <div class="form-group col-md-4">
+                <label for="time">Time</label>
+                <input type="text" id="time" disabled="true" class="form-control" value="0">
+            </div>
         </div>
 
         <div id="filterCollapse" class="collapse">
@@ -50,10 +62,8 @@
             </div>
 
             <div class="row" style="padding: 0px 0px 0px 15px">
-                <div class="form-group col-md-2">
-                    <label for="nLinesInput">n lines generates</label>
-                    <input type="text" id="nLinesInput" class="form-control" value="1">
-                </div>
+
+
             </div>
         </div>
 
